@@ -125,19 +125,64 @@
                 <h4 id="shell-windows-wsl-store">Via the Microsoft Store:</h4>
                 <ol>
                     <li>Open the Windows Start Menu button in the bottom left corner of your screen (four blue squares), or tap the <kbd>Win</kbd> Windows button on your keyboard (between the bottom left <kbd>CTRL</kbd> and <kbd>ALT</kbd> keys) and search “store”. Open the Microsoft Store.</li>
-                    <li>In the Microsoft Store search bar, type “wsl ubuntu”, and select the Ubuntu 22.04 or 24.04 option (at the time of writing, <code>Ubuntu 22.04.06 LTS</code>, or <code>Ubuntu 24.04.01 LTS</code>):
+                    <li>In the Microsoft Store search bar, type “wsl ubuntu”, and select the <code>Ubuntu 24.04.01 LTS</code>:
                         <ul>
                             <li>If a pop-up window appears asking if you want to make changes to your device, select “Yes”</li>
                             <li>The install should proceed, and this can take a few minutes depending on your PC performance and internet download speed.</li>
                             <li>Once installed, restart the computer.</li>
                         </ul>
                     </li>
+                <details>
+                    <summary>Did that installation failed?</summary>
+                    <div class="alert alert-warning">
+                        <p>
+                            If that's the case, you may need to set some settings on Windows for it to work. Note that you may need to have administrator access to do so.
+                        </p>
+                        <p>
+                          There are two options to enable WSL, one using the terminal, and another using the graphical interface:
+			  <ol>
+			    <li> <strong>Using the graphical interface</strong>:
+			      <ul>
+				<li> Open the Control Panel → Programs and Features → Turn Windows features on or off </li>
+				<li> Enable Virtual Machine Platform, Hyper-V, and Windows Subsystem for Linux. </li>
+			      </ul></li>
+			    <li> <strong>Using PowerShell as administrator</strong>:
+			      <ul>
+				<li>open the Window Start menu button or tap the <kbd>Win</kbd> Windows button on your keyboard and search "powershell"</li>
+				<li>Select "Run as Administrator" on the right hand side panel</li>
+				<li>If a pop-up window appears asking if you want to make changes to your device, select "Yes"</li>
+				<li>Run the following commands
+				  <pre>
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+DISM /Online /Enable-Feature /All /FeatureName:Microsoft-Hyper-V
+				  </pre>
+			    </ul></li>
+			    </ol>
+                          Once you've followed those steps, try to run the Ubuntu 24.04 installer again as shown above.
+                        </p>
+                    </div>
+                </details>
                     <li>Once restarted, reopen the Windows Start Menu button in the bottom left corner of your screen, or tap the Windows button on your keyboard. In the search bar, type either:
                         <ul>
-                            <li><code>Ubuntu</code>: selecting <code>Ubuntu 22.04.06 LTS</code> or <code>Ubuntu 24.04.01 LTS</code> from the Start Menu will open the bash prompt directly, or</li>
-                            <li><code>Terminal</code>: this will open a new Windows Terminal window, which will look like a blank black window with a blinking cursor waiting for input. <strong>Note:</strong> This terminal might default to Powershell, and not Ubuntu. If this is the case, click the down arrow in the Terminal window menu bar at the top, and then click Ubuntu 22.04 or 24.04, depending on the version you installed. It will also show keyboard shortcuts (e.g. Ctrl+Shift+1) to open the various prompts available within the Terminal application.</li>
+                            <li><code>Ubuntu</code>: selecting <code>Ubuntu 24.04.01 LTS</code> from the Start Menu will open the bash prompt directly, or</li>
+                            <li><code>Terminal</code>: this will open a new Windows Terminal window, which will look like a blank black window with a blinking cursor waiting for input. <strong>Note:</strong> This terminal might default to Powershell, and not Ubuntu. If this is the case, click the down arrow in the Terminal window menu bar at the top, and then click Ubuntu 24.04. It will also show keyboard shortcuts (e.g. Ctrl+Shift+1) to open the various prompts available within the Terminal application.</li>
                         </ul>
                     </li>
+		    <li> The first time you open the terminal it will ask you to create a username and set a password. That username and password doesn't need to be the same than the windows system.
+		      It can be anything, but don't forget the password as you'll need it on future steps.
+                <details>
+                    <summary>The terminal seems not responding when setting the password</summary>
+                    <div class="alert alert-warning">
+                        <p>
+                          The terminal is responsive, but as a safety feature the password is not shown, not even as <codd>****</code> as this would provide an information about its length to some prying eyes.
+                        </p>
+                        <p>
+                          Type your password slowly and press <kbd>Enter</kbd>, it will ask you to enter your password again. If both matches, then the password would be set, otherwise, it will ask you to start again.
+			</p>
+                    </div>
+                </details>
+		    </li>
                     <li>Follow the <a href="#shell-windows-wsl-install-software">Installing software within WSL 2</a> section below.</li>
                 </ol>
 
